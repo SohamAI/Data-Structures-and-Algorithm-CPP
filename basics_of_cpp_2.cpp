@@ -25,7 +25,7 @@ using namespace std;
         }
     */
 
-//Simple Function Implementation : 
+//Simple Function Implementation : Call By Value 
 
 void greet(){ //--> Void means It Returns Nothing.
     cout<<"Good Morning"<<endl;
@@ -50,6 +50,14 @@ bool isEven(int Number1){
     else{
         return false;
     }
+}
+
+// Call by reference Functions : 
+
+void swapValue(int *num1 , int *num2){
+    int temp = *num2;
+    *num2 = *num1;
+    *num1 = temp;
 }
 
 int main(){
@@ -88,12 +96,40 @@ int main(){
 
 
     // call By Value and call by reference : 
+
+    /*
+    The Data to the Functions is Passed in two Ways : 
+
+    1) Call By Value : 
+    In call by value, original value is not modified.
+
+    In call by value, value being passed to the function is locally stored by the function parameter in stack memory location. If you change the value of function parameter, it is changed for the current function only. It will not change the value of variable inside the caller method such as main().
+
+    the All Examples are written under Call by Value Comment.
     
+
+    2) Call by reference : 
+    In call by reference, original value is modified because we pass reference (address).
+
+    Here, address of the value is passed in the function, so actual and formal arguments share the same address space. Hence, value changed inside the function, is reflected inside as well as outside the function.
+
+    We Use Pointers in the parameters of the function to access the Original value from the Memory 
+    */
+
+    int num1 = 10;
+    int num2 = 20;
+
+    cout<<"Value Before passing to the Function : "<<num1<<" "<<num2<<endl;
+
+    swapValue(&num1, &num2); //--> we have to use the & operator as we are sending the address in the Arguments 
+
+    //the arguments are the actual values which are passed to the Functions and Parameters are the Placeholders of the variables
     
+    cout<<"Value After passing to the Function : "<<num1<<" "<<num2<<endl;
 
+    //---------------------------------------------------------------------------------------
 
-
-
+    // For further Learning go to Oops : 
     return 0;
 
 }
