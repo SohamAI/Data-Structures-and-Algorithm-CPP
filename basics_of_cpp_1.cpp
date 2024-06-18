@@ -139,7 +139,82 @@ int main(){ //--> the program in C++ starts From the main Function
 
     //---------------------------------------------------------------------------------------
 
+    // Looping in C++ : 
+    /*
+         The Loops are the Components which Help to execute the Same Logic for the Number of times.
 
+         the Loops are Divided in 3 types : 
+         
+         1) While Loop : While Loop runs the Logic for the Given Number of times.
+         the Control flow is : check the condition --> run the code --> Check the condition ....
+
+         2) do while loop :
+          this is similar to the while loop but it Executes the Code first and then Checks the condition
+          the control flow of do while loop is : 
+          execute first --> check the condition --> execute code.....
+          due to this Behaviour , it runs at least once...
+
+        3) for loop : 
+         the task is Similar to the first two Loops, to run the Logic(code) for the Given Number of times..
+         the difference is in the Control Flow : 
+         initialization of counter --> check the condition --> execute the code --> increment the counter --> check the condition ....
+
+        ** its Important to increase the counter as if the counter is Not Incremented or the termination Condition is Not Handled Properly than it can lead it to the Infinite Loop , Freezing up the computer resources... which is not at all recommended.
+    */
+
+   //Implementation of the loops : 
+
+   /*
+    here we have make use of the Increment and Decrement operators : 
+    var++ --> post Increment Operator means use the value of variable first and then increment it.
+    ++var --> pre Increment Operator means increment the Variable first and then use it
+
+    similarly there are Post and Pre Decrement Operators : var--, --var
+   */
+
+   //while loop :
+    int l1 = 0;
+    while(l1 < 10){
+        cout<<l1++<<" ";
+    }
+    cout<<endl;
+
+    //do while loop:
+    int l2 = 0;
+    do{
+        cout<<++l2<<" ";
+    }
+    while(l2<10);
+    cout<<endl;
+
+    //for loop : 
+    for(int i = 1; i<=10; i++){
+        cout<<i<<" ";
+    }
+    cout<<endl;
+
+    /*
+        Print the Given Pattern : 
+        *
+        **
+        ***   
+    */
+
+    int stP;
+    cout<<"How Many Rows of Stars You have to Print : ?"<<endl;
+    cin>>stP;
+
+    for(int i = 0; i<stP; i++){ //--> for rows
+        for(int j = 0; j<=i; j++){ //--> for Printing Stars
+            cout<<"*"<<" ";
+        }
+        cout<<endl;
+    }
+
+    //---------------------------------------------------------------------------------------
+
+    
+    //Go To the Part 2 of the File for Further Learnings : 
 
     return 0; //--> returns the 0 from the main function indicating the program was successfully executed
 }
