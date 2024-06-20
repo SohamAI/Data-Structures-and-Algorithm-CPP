@@ -5,6 +5,7 @@ purpose : To Understand the Oops (Object Oriented Programming)
 */
 
 #include<iostream>
+#include<string.h>
 using namespace std;
 
 /*
@@ -91,21 +92,37 @@ class greedyperson{
 class person{
 
     public:
-    string name;
+    char *name;
     int salary;
 
     person(){
         cout<<"Constructor Called ."<<endl;
+        
     }
 
-    person(int salary, string name){
-        //This Keyword explained down..
-        this -> name = name;
+    person(int salary){
+        //This Keyword explained down.
         this -> salary = salary;
+        name = new char[100];
+    }
+
+    person(person& p1){
+      cout<<"Custom Copy constructor called"<<endl;
+
+      char *n1 = new char[strlen(p1.name)+1];
+      strcpy(n1, p1.name);
+      this->name = n1;
+
+      this -> salary = p1.salary;
+
     }
 
     void showDetails(){
         cout<<this->name<<" "<<this->salary<<endl;
+    }
+
+    void setName(char name[]){
+         strcpy(this->name, name);
     }
 };
 
@@ -208,9 +225,43 @@ int main(){
     This Keyword : This Keyword is Used to Store the Address of the Current Object and using "This" Keyword we can Store the Values in the Current Data Members.
     */
 
-   person *pr2 = new person(50000, "Skm");
-   pr2->showDetails();
+   person pr2(50000);
+   char ch[4] = "skm";
+   pr2.setName(ch);
+   pr2.showDetails();
 
+   /*
+    Copy Constructor : This is a Type of a constructor which is automatically created (default Copy Constructor) and is used to copy the data members/ properties of orginal Object into Copy Object.
+
+    The Copy Created by Default Copy Constructor is a Shallow Copy.
+
+    Shallow Copy : The shallow copy is a copy which stores the References/Addresses of the Data Members into the Copy Object, so whenever there is a Change in the Original Object it will be reflected in the shallow copy
+
+    Deep Copy : deep copy truly clones the Object but it requires to implement Custom copy Constructor.
+
+    * the default copy constructor dies after the Custom / user defined Copy Constructor is Implemented.
+
+    */
+
+
+   // Implementing the Default Copy Constructor : 
+
+   person pr3(pr2);  //--> new shallow Object
+   pr3.showDetails();
+
+   pr2.name[0] = 'k'; //--> changing details in original object
+   pr2.showDetails();
+
+   pr3.showDetails(); //--> here also the changes are reflected which is a Wrong thing.
+
+   // Implementing A Deep Copy Constructor : 
+
+    person pr4(pr2); //--> new Deep Object
+
+    pr2.name[0] = 'l'; //--> changing details in original object
+    pr2.showDetails();
+
+    pr4.showDetails(); //--> here even after changing the original Object the changes are not reflected
 
    return 0; 
 }
