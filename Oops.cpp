@@ -67,6 +67,48 @@ class car{
     }
 };
 
+class normalperson{
+
+    // Before Following Greedy Alignment : 24 bytes
+    //Properties : 
+    public:
+    int salary; //--> 4 bytes
+    double age; // --> 8 bytes
+    char Position; //--> 1 bytes
+
+};
+
+class greedyperson{
+    // After following Greedy Alignment :  
+    // properties :
+    public:
+    double age; //--> 8 bytes
+    int salary; //--> 4 bytes
+    char position; //--> 1 bytes
+};
+
+
+class person{
+
+    public:
+    string name;
+    int salary;
+
+    person(){
+        cout<<"Constructor Called ."<<endl;
+    }
+
+    person(int salary, string name){
+        //This Keyword explained down..
+        this -> name = name;
+        this -> salary = salary;
+    }
+
+    void showDetails(){
+        cout<<this->name<<" "<<this->salary<<endl;
+    }
+};
+
 int main(){
 
     //Creation of the Object : 
@@ -103,8 +145,72 @@ int main(){
    c3.setName("Soham"); //--> using the Setter to set the value of the private data Member
    cout<<c3.getName()<<endl; //--> using the Getter to get the Value of the private data Member.
 
+    // Behind the Scenes of Storing the Object in Memory : 
+    /*
+        according to the Operating System X64 bits, every operation requires 8 bytes
+        so in the First Normal Person p1;
+        1) int salary --> 4byte + 4byte padding = 8 byte
+        2) double age --> 8 byte = 8 byte
+        3) char position --> 1 byte + padding 7 byte = 8 byte
+        Total space taken = 24 byte
 
+        *The padding is the Space Allocated by the compiler to Fill the space upto 8bytes 
 
+        * The greedy Alignment Is a Technique that is used in Object Oriented Programming , here we     
+        order the Variables/ properties in a Decreasing order, The Variable Taking up large space Will come first and   
+        variable take least space will come last.
+        * so in the second greedyperson:
+        1) double age --> 8 bytes = 8 bytes
+        2) int salary --> 4bytes + char position --> 1 byte + padding 3 bytes = 8 bytes
+        Total Space taken = 16 bytes
+        (The Space Reduced to the 16 bytes from the 24 bytes).
+
+    */
+   normalperson p1;
+   cout<<"Size Not Using Greedy Alignment : "<<sizeof(p1)<<endl; //--> 24 bytes
+
+   greedyperson g1;
+   cout<<"Size After Following Greedy Alignment : "<<sizeof(g1)<<endl; //--> 16 bytes
+
+   // Static Allocation and Dynamic Allocation
+   
+   //Static Allocation :
+   /*
+   Static Memory is the memory allocated in the advanced Before the program Runs.
+   */
+   normalperson p2; 
+
+   //dynamic Allocation : 
+   /*
+     dynamic Memory is the memory allocated During the runtime.. the memory allocated is in the heap memory 
+   */
+   normalperson *n1 = new normalperson;
+
+   //Constructor : 
+   /*
+    * Constructor in C++ is a special method that is invoked automatically at the time of object creation. It is used to initialize the data members of new objects generally. The constructor in C++ has the same name as the class or structure. It constructs the values i.e. provides data for the object which is why it is known as a constructor.
+
+    * Constructors do not return value, hence they do not have a return type.
+    * Constructor is invoked at the time of object creation. It constructs the values i.e. provides data for the object that is why it is known as a constructor.
+    * Constructor is a member function of a class, whose name is the same as the class name.
     
+    There Are Two Types of Constructor : 
+    1) default Constructor : The constructor that is Built automatically at the time of the Object creation.
+
+    2) Parameterized constructor : The Constructor that is Built by the user to Pass the values at the time of the object Creation for initialization of the Object data members.
+
+    * when the Constructor is Written Explicitly the Default Constructor dies.
+   */
+
+    person *pr1 = new person();
+
+    /*
+    This Keyword : This Keyword is Used to Store the Address of the Current Object and using "This" Keyword we can Store the Values in the Current Data Members.
+    */
+
+   person *pr2 = new person(50000, "Skm");
+   pr2->showDetails();
+
+
    return 0; 
 }
