@@ -124,7 +124,24 @@ class person{
     void setName(char name[]){
          strcpy(this->name, name);
     }
+
+    ~person(){ 
+        //this is a Destructor : Explained Down
+        cout<<"Destructor is Called For"<<this->name<<endl;
+    }
 };
+
+class animal{
+    public:
+    static int age; //--> this data member can Be accessed from anywhere.
+
+    static int getAge(){
+        return age;
+    }
+
+};
+
+int animal::age = 10;
 
 int main(){
 
@@ -262,6 +279,58 @@ int main(){
     pr2.showDetails();
 
     pr4.showDetails(); //--> here even after changing the original Object the changes are not reflected
+
+
+    //Copy Assignment Operator: it is just to copy the data members from a object to other object
+
+    person pr5;
+    pr5 = pr4;
+
+    cout<<"pr4 Details : "<<endl;
+    pr4.showDetails();
+
+    cout<<"pr5 Details : "<<endl;
+    pr5.showDetails();
+
+
+
+
+    /*  
+    *Destructor : The Destructor is used to Deallocate the memory used by the object, before the program ends. 
+
+    *the default Destructor is defined once the object is Created.
+
+    *The Default Destructor is Called Automatically for Statically Created Objects.
+
+    *For the Dynamically created Objects we have to Free the Memory Manually using the "delete" Keyword.
+
+    * we can also create the Custom Destructor:
+        the name is same as the constructor , but preceded with a ~ (tilde) sign, no return type, no parameters.
+    
+    */
+
+   //statically created object : 
+   person pr6; //--> destructor will be called automatically for it.
+   char temp1[4] = "pr6";
+   pr6.name = temp1;
+
+   person *pr7 = new person();
+   char temp2[4] = "pr7"; 
+   pr7->name = temp2;
+   delete pr7; //--> manually calling Destructor.
+
+    /*
+        const and Static Keywords : 
+        
+        *const keywords are used to define a Varible Whose value can't be Changed Once defined in whole program.
+
+        *static Keywords are used to define data members who belong to a class but their value can be accessed from anywhere
+
+        * A special operator is used to Access the Static member and Functions , its Scope Resolution Operator (::).
+
+    */
+
+   cout<<"Static Member Function : "<<animal::getAge()<<endl;
 
    return 0; 
 }
